@@ -1,0 +1,35 @@
+<div class="list-container">
+  <h2>Upcoming Events</h2>
+
+  <!-- Loading spinner while fetching events -->
+  <div *ngIf="isLoading" class="spinner-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <!-- Message when no events exist -->
+  <p *ngIf="!isLoading && events.length === 0" class="no-events">
+    No events found. Create one!
+  </p>
+
+  <!-- Event cards -->
+  <mat-card *ngFor="let event of events" class="event-card">
+    <mat-card-header>
+      <mat-card-title>{{ event.title }}</mat-card-title>
+      <mat-card-subtitle>{{ event.category }} — {{ event.location }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>{{ event.description }}</p>
+      <p><strong>Start:</strong> {{ event.startDate | date: 'mediumDate' }}</p>
+      <p><strong>End:</strong> {{ event.endDate | date: 'mediumDate' }}</p>
+      <p><strong>Max Attendees:</strong> {{ event.maxAttendees }}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="warn" (click)="deleteEvent(event.id)">
+        Delete Event
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>

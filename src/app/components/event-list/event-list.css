@@ -1,0 +1,45 @@
+/* Main container for the event list */
+.list-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 24px;
+}
+
+/* Page title */
+h2 {
+  margin-bottom: 24px;
+  color: #333;
+  font-size: 24px;
+}
+
+/* Individual event card */
+.event-card {
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card content spacing */
+mat-card-content {
+  margin-top: 12px;
+}
+
+/* Card action buttons */
+mat-card-actions {
+  padding: 8px 16px;
+}
+
+/* Spinner centering */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+/* No events message */
+.no-events {
+  text-align: center;
+  color: #888;
+  font-size: 16px;
+  margin-top: 40px;
+}

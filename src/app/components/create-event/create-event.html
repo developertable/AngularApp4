@@ -1,0 +1,77 @@
+<div class="form-container">
+  <h2>Create New Event</h2>
+
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+
+    <!-- Event Title with async unique validator -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Event Title</mat-label>
+      <input matInput formControlName="title" placeholder="Enter event title">
+      <mat-error *ngIf="title?.hasError('required')">Title is required</mat-error>
+      <mat-error *ngIf="title?.hasError('minlength')">Title must be at least 3 characters</mat-error>
+      <mat-error *ngIf="title?.hasError('titleTaken')">This title is already taken</mat-error>
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="3" placeholder="Describe your event"></textarea>
+      <mat-error *ngIf="description?.hasError('required')">Description is required</mat-error>
+      <mat-error *ngIf="description?.hasError('minlength')">At least 10 characters required</mat-error>
+    </mat-form-field>
+
+    <!-- Category Dropdown -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="category?.hasError('required')">Category is required</mat-error>
+    </mat-form-field>
+
+    <!-- Location -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location" placeholder="Event location">
+      <mat-error *ngIf="location?.hasError('required')">Location is required</mat-error>
+    </mat-form-field>
+
+    <!-- Max Attendees -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Max Attendees</mat-label>
+      <input matInput type="number" formControlName="maxAttendees">
+      <mat-error *ngIf="maxAttendees?.hasError('required')">This field is required</mat-error>
+      <mat-error *ngIf="maxAttendees?.hasError('min')">Must be at least 1</mat-error>
+      <mat-error *ngIf="maxAttendees?.hasError('max')">Cannot exceed 1000</mat-error>
+    </mat-form-field>
+
+    <!-- Start Date -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Start Date</mat-label>
+      <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+      <mat-error *ngIf="startDate?.hasError('required')">Start date is required</mat-error>
+    </mat-form-field>
+
+    <!-- End Date -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>End Date</mat-label>
+      <input matInput [matDatepicker]="endPicker" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+      <mat-error *ngIf="endDate?.hasError('required')">End date is required</mat-error>
+    </mat-form-field>
+
+    <!-- Date range error at form level -->
+    <mat-error *ngIf="eventForm.hasError('invalidDateRange') && startDate?.touched && endDate?.touched">
+      End date must be after start date
+    </mat-error>
+
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Saving...' : 'Create Event' }}
+    </button>
+
+  </form>
+</div>

@@ -1,0 +1,65 @@
+<div class="form-container">
+  <h2>RSVP for an Event</h2>
+
+  <!-- Template-driven form using ngModel -->
+  <form #rsvpForm="ngForm" (ngSubmit)="onSubmit(rsvpForm)">
+
+    <!-- Name Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Full Name</mat-label>
+      <input
+        matInput
+        name="name"
+        [(ngModel)]="rsvpModel.name"
+        required
+        minlength="2"
+        #name="ngModel"
+        placeholder="Enter your full name">
+      <mat-error *ngIf="name.invalid && name.touched">
+        Name is required (min 2 characters)
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Email Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email Address</mat-label>
+      <input
+        matInput
+        name="email"
+        [(ngModel)]="rsvpModel.email"
+        required
+        email
+        #email="ngModel"
+        placeholder="Enter your email">
+      <mat-error *ngIf="email.hasError('required') && email.touched">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="email.hasError('email') && email.touched">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Event Selection Dropdown -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select Event</mat-label>
+      <mat-select
+        name="eventId"
+        [(ngModel)]="rsvpModel.eventId"
+        required
+        #eventId="ngModel">
+        <mat-option *ngFor="let event of events" [value]="event.id">
+          {{ event.title }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="eventId.invalid && eventId.touched">
+        Please select an event
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <button mat-raised-button color="accent" type="submit" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Submitting...' : 'Submit RSVP' }}
+    </button>
+
+  </form>
+</div>

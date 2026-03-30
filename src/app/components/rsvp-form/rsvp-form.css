@@ -1,0 +1,29 @@
+/* Main container for the RSVP form */
+.form-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 24px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form title */
+h2 {
+  margin-bottom: 24px;
+  color: #333;
+  font-size: 24px;
+}
+
+/* Makes all form fields full width */
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Submit button styling */
+button {
+  margin-top: 16px;
+  width: 100%;
+  padding: 8px;
+}
