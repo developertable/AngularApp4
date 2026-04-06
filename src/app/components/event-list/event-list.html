@@ -19,7 +19,7 @@
     </mat-card-header>
 
     <mat-card-content>
-      <p>{{ event.description }}</p>
+      <p>{{ event.description | truncate:100 }}</p>
       <p><strong>Start:</strong> {{ event.startDate | date: 'mediumDate' }}</p>
       <p><strong>End:</strong> {{ event.endDate | date: 'mediumDate' }}</p>
       <p><strong>Max Attendees:</strong> {{ event.maxAttendees }}</p>

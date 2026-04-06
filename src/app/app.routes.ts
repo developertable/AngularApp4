@@ -1,21 +1,19 @@
 import { Routes } from '@angular/router';
-import { CreateEventComponent } from './components/create-event/create-event';
-import { RsvpFormComponent } from './components/rsvp-form/rsvp-form';
-import { EventListComponent } from './components/event-list/event-list';
 
+// Using lazy loading for all routes to reduce initial bundle size
 export const routes: Routes = [
-  // Default route redirects to event list
-  { path: '', component: EventListComponent },
+  // Default route - lazy loads event list
+  { path: '', loadComponent: () => import('./components/event-list/event-list').then(m => m.EventListComponent) },
 
-  // Event list page
-  { path: 'events', component: EventListComponent },
+  // Event list page - lazy loaded
+  { path: 'events', loadComponent: () => import('./components/event-list/event-list').then(m => m.EventListComponent) },
 
-  // Create event page
-  { path: 'create', component: CreateEventComponent },
+  // Create event page - lazy loaded
+  { path: 'create', loadComponent: () => import('./components/create-event/create-event').then(m => m.CreateEventComponent) },
 
-  // RSVP form page
-  { path: 'rsvp', component: RsvpFormComponent },
+  // RSVP form page - lazy loaded
+  { path: 'rsvp', loadComponent: () => import('./components/rsvp-form/rsvp-form').then(m => m.RsvpFormComponent) },
 
-  // Wildcard route — redirects unknown paths to event list
+  // Wildcard route
   { path: '**', redirectTo: 'events' }
 ];

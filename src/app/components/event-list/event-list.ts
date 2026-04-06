@@ -1,3 +1,4 @@
+import { TruncatePipe } from '../../pipes/truncate-pipe';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventService } from '../../services/event.service';
@@ -16,7 +17,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    TruncatePipe
   ],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css'
